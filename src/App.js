@@ -135,6 +135,7 @@ export default function App() {
 
   function getApiData (prevResponse) {
     console.log(url)
+    console.log('pehli baar')
     setLoading(true)
     const result =  fetch(url)
       .then((response) => response.json())
