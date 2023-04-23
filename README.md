@@ -1,4 +1,4 @@
-# Try out this app using the link : https://jolly-sea-0d4a3e410.3.azurestaticapps.net/
+# Try out this app using the link : https://witty-island-044007110.3.azurestaticapps.net/
 
 
 # Getting Started with Create React App
