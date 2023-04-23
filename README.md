@@ -1,3 +1,6 @@
+# Try out this app using the link : https://jolly-sea-0d4a3e410.3.azurestaticapps.net/
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
