@@ -3,18 +3,13 @@ import IngredientList from "./IngredientList";
 import FavoriteList from "./FavoriteList";
 import ChatBot from "./ChatBot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBasketShopping, faHeart, faMessage} from "@fortawesome/free-solid-svg-icons";
-
-import {Typography, AppBar, Card, CardActions, CardMedia, CardContent, CssBaseline, Grid, Toolba, Container, Toolbar } from '@mui/material'
-
-
-
+import {
+  faBasketShopping,
+  faHeart,
+  faMessage,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Head(props) {
-
-
-  
-  
   const meal = ["Breakfast", "Lunch", "Dinner", "Snack", "Teatime"].map(
     (meals) => {
       return (
@@ -74,32 +69,8 @@ export default function Head(props) {
     );
   });
   return (
-
-    // <>
-    //   <CssBaseline/>
-    //   <AppBar position="sticky" style={{ background : "#1f7a8c"}}>
-    //     <Toolbar>
-    //       <Typography variant="h6"> 
-    //         Categories
-    //       </Typography>
-    //       <span onClick={props.handleOpenFavs} style={{ cursor: "pointer" }}>
-    //       <FontAwesomeIcon
-    //         icon={faHeart}
-    //         size="2xl"
-    //         style={{
-    //           color: "rgb(171 40 31)",
-    //           position: "absolute",
-    //           top: "42px",
-    //           left: "265px",
-    //         }}
-    //       />
-    //     </span> 
-    //     </Toolbar>
-    //   </AppBar>
-    // </>
-   
     <header>
-      <nav >
+      <nav>
         <ul className="menu">
           <li>
             <a href="#" style={{ fontSize: "25px", fontWeight: "500" }}>
@@ -149,7 +120,7 @@ export default function Head(props) {
             color: "#034d4f",
             position: "absolute",
             top: "42px",
-            left : "208px",
+            left: "208px",
           }}
         />
       </span>
@@ -161,7 +132,7 @@ export default function Head(props) {
             color: "#034d4f",
             position: "absolute",
             top: "44px",
-            left : "317px",
+            left: "317px",
           }}
         />
       </span>
@@ -194,19 +165,10 @@ export default function Head(props) {
       />
 
       <ChatBot
-        chatBot = {props.chatBot}
-        handleShowBot = {props.handleShowBot}
-        handleCloseBot = {props.handleCloseBot}
-        
+        chatBot={props.chatBot}
+        handleShowBot={props.handleShowBot}
+        handleCloseBot={props.handleCloseBot}
       />
-
-     
-      
-      
-        {/* <p style={{color: "#746363", fontsize: "28px"}}>Welcome {props.username}!</p> */}
-   
     </header>
-
-    
   );
 }

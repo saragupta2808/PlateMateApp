@@ -12,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale; */
   background-image: url('./components/bg-cook13.jpg');
   
-  background-color: #63CCCA;
+  /* background-color: #63CCCA; */
   background-size: 100% ;
   background-repeat: repeat;
   
@@ -23,10 +23,6 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
 
 
 

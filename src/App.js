@@ -5,7 +5,6 @@ import RecipeCard from "./components/RecipeCard";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 export default function App() {
   //azure till here
   const [recipeData, setRecipeData] = React.useState([]);
@@ -20,6 +19,67 @@ export default function App() {
   const [showFavs, setShowFavs] = React.useState(false);
   const [chatBot, setChatBot] = React.useState(false);
   const [greeting, setGreeting] = React.useState("");
+  const [hasMore, sethasMore] = React.useState(true);
+  const [url, setUrl] = React.useState(
+    `https://api.edamam.com/api/recipes/v2/?type=public&app_id=89d6a7bf&app_key=b6aafb08de37e4b384672eea7066b05f&${filter}=${filterValue}`
+  );
+  const [nextUrl, setNextUrl] = React.useState("");
+
+  React.useEffect(() => {
+    const date = new Date();
+    const hours = date.getHours();
+    if (hours >= 0 && hours <= 12) {
+      setFilter("mealType");
+      setFilterValue("Breakfast");
+      setGreeting(`Good Morning! Here are some breakfast ideas for you`);
+    } else if (hours > 12 && hours <= 16) {
+      setFilter("mealType");
+      setFilterValue("Lunch");
+      setGreeting(`Good Afternoon!Here are some lunch ideas for you`);
+    } else if (hours > 16 && hours <= 18) {
+      setFilter("mealType");
+      setFilterValue("Teatime");
+      setGreeting("Good Evening ! Here are some teatime recipes for you");
+    } else if (hours > 18 && hours <= 20) {
+      setFilter("mealType");
+      setFilterValue("Snack");
+      setGreeting("Good Evening ! Here are some snack ideas for you");
+    } else if (hours >= 20) {
+      setFilter("mealType");
+      setFilterValue("Dinner");
+      setGreeting("Good Evening !Here are some dinner recipes for you");
+    }
+
+    const list = JSON.parse(localStorage.getItem("dataKey"));
+    if (list) {
+      setShoppingList(list);
+    }
+  }, []);
+  React.useEffect(() => {
+    //console.log('rendered')
+    let promise = getApiData(recipeData);
+    promise.then(
+      (result) => {
+        console.log(result);
+        setRecipeData(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, [url]);
+  React.useEffect(() => {
+    console.log("setting url");
+
+    setUrl(
+      `https://api.edamam.com/api/recipes/v2/?type=public&app_id=89d6a7bf&app_key=b6aafb08de37e4b384672eea7066b05f&${filter}=${filterValue}`
+    );
+  }, [filter, filterValue]);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [recipeData]);
 
   const handleOpenFavs = () => setShowFavs(true);
   const handleCloseFavs = () => setShowFavs(false);
@@ -30,7 +90,6 @@ export default function App() {
   const handleCloseBot = () => setChatBot(false);
   const handleShowBot = () => {
     setChatBot(true);
-    //console.log('chatbot clicked at app.js')
   };
 
   function handleAddToFavs(recipe) {
@@ -57,16 +116,13 @@ export default function App() {
       return favs;
     });
   }
-  //console.log(favList)
+
   function handleStrike(index, line) {
-    //console.log(line)
-    // console.log(isStriked)
     setShoppingList((prevState) => {
       return prevState.map((item) => {
         let obj = { ...line };
 
         if (item.name === line.recipe) {
-          //console.log('found')
           obj.isStriked = !line.isStriked;
           const ing = [...item.ingredients];
           ing[index] = obj;
@@ -79,23 +135,15 @@ export default function App() {
     });
   }
 
-  const [hasMore, sethasMore] = React.useState(true);
-  const [url, setUrl] = React.useState(
-    `https://api.edamam.com/api/recipes/v2/?type=public&app_id=89d6a7bf&app_key=b6aafb08de37e4b384672eea7066b05f&${filter}=${filterValue}`
-  );
-  const [nextUrl, setNextUrl] = React.useState("");
-
   function getApiData(prevResponse) {
-    // console.log(url);
-  
     setLoading(true);
     const result = fetch(url)
       .then((response) => response.json())
-      // setProgress(progress + 10)
+
       .then((response) => {
         const recp = response.hits;
         const newResponse = [...prevResponse, ...recp];
-        // setProgress(progress + 20)
+
         if (response["_links"] && response["_links"].next) {
           setNextUrl(response["_links"].next.href);
           setError(null);
@@ -103,7 +151,6 @@ export default function App() {
         } else {
           sethasMore(false);
         }
-        // setProgress(progress + 30)
 
         return newResponse;
       })
@@ -116,74 +163,20 @@ export default function App() {
 
     return result;
   }
-
-  React.useEffect(() => {
-    const date = new Date();
-    const hours = date.getHours();
-    if (hours >= 0 && hours <= 12) {
-      setFilter("mealType");
-      setFilterValue("Breakfast");
-      setGreeting(`Good Morning! Here are some breakfast ideas for you`);
-    } else if (hours > 12 && hours <= 16) {
-      setFilter("mealType");
-      setFilterValue("Lunch");
-      setGreeting(`Good Afternoon!Here are some lunch ideas for you`);
-    } else if (hours > 16 && hours <= 18) {
-      setFilter("mealType");
-      setFilterValue("Teatime");
-      setGreeting("Good Evening ! Here are some teatime recipes for you");
-    } else if (hours > 18 && hours <= 20) {
-      setFilter("mealType");
-      setFilterValue("Snack");
-      setGreeting("Good Evening ! Here are some snack ideas for you");
-    } else if (hours >= 20) {
-      setFilter("mealType");
-      setFilterValue("Dinner");
-      setGreeting("Good Evening !Here are some dinner recipes for you");
-    }
-  }, []);
-  React.useEffect(() => {
-    //console.log('rendered')
-    let promise = getApiData(recipeData);
-    promise.then(
-      (result) => {
-        //console.log(result);
-        setRecipeData(result);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }, [url]);
-  React.useEffect(() => {
-    setRecipeData([]);
-
-    setUrl(
-      `https://api.edamam.com/api/recipes/v2/?type=public&app_id=89d6a7bf&app_key=b6aafb08de37e4b384672eea7066b05f&${filter}=${filterValue}`
-    );
-  }, [filter, filterValue]);
-
   function onScroll() {
     const scrollTop = document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight;
     const clientHeight = document.documentElement.clientHeight;
-    //console.log(Math.ceil(scrollTop))
 
     if (Math.ceil(scrollTop) + clientHeight >= scrollHeight && hasMore) {
-      //console.log('reached at the end')
       setUrl(nextUrl);
-      console.log(nextUrl);
     }
   }
 
-  React.useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [recipeData]);
-
   function handleFilter(category, filter) {
     const parameter = category + "Type";
-    console.log(parameter, filter);
+    // console.log(parameter, filter);
+    setRecipeData([]);
     setFilter(parameter);
     setFilterValue(filter);
     setGreeting("");
@@ -195,8 +188,9 @@ export default function App() {
 
   function handleSubmit(event) {
     event.preventDefault(); //to prevent page from reloading and the form getting cleared
-    console.log(search);
+    //console.log(search);
     if (search) {
+      setRecipeData([]);
       setFilterValue(search);
       setFilter("q");
       setGreeting("");
@@ -224,12 +218,10 @@ export default function App() {
 
       return updatedList;
     });
-
+    localStorage.setItem("dataKey", JSON.stringify(shoppingList));
     toast.success("Successfully added ingredients to your list!");
   }
-  //console.log(shoppingList)
 
-  // console.log(shoppingList)
   const recipelist = recipeData.map((recipe, index) => {
     return (
       <RecipeCard
@@ -246,6 +238,7 @@ export default function App() {
       />
     );
   });
+
   function handleIsFavorite(url) {
     for (let i = 0; i < favList.length; i++) {
       if (favList[i].url === url) {
@@ -256,7 +249,6 @@ export default function App() {
   }
 
   function handleDeleteRecipe(item) {
-    //console.log(item.name)
     setShoppingList((prevState) => {
       const newShoppinglist = [];
       for (let i = 0; i < prevState.length; i++) {
@@ -268,7 +260,6 @@ export default function App() {
   }
 
   return (
-    
     <div className="App">
       <Head
         search={search}
@@ -305,29 +296,9 @@ export default function App() {
         <div>{`There is a problem fetching the post data - ${error}`}</div>
       )}
 
-      {/* <div>
-          <h2 className="logo home-logo">Plate Mate</h2>
-            <div className="home-image"></div>
-        </div>
-         */}
       <br></br>
       <br></br>
 
-      {/* <MDBFooter
-        className="text-center text-white"
-        style={{ backgroundColor: "white" }}
-      >
-        <MDBContainer className="p-4"></MDBContainer>
-
-        <div
-          className="text-center p-3"
-          style={{ backgroundColor: "rgb(149 219 207)" }}
-        >
-          © 2023 Copyright:
-          <p className="text-white">PlateMate : Your Recipe Buddy</p>
-        </div>
-        
-      </MDBFooter> */}
       <footer id="edamam-badge" data-color="white"></footer>
     </div>
   );
