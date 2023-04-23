@@ -34,7 +34,7 @@ export default function IngredientList(props) {
       <FontAwesomeIcon icon={faUtensils} size = "lg" style={{color: "#422800",}} />
       <h6 style={{color: "#0c7b68",  marginLeft : "5px", marginBottom : "0"}}>{foodName}</h6>
       <span onClick={()=>props.handleDeleteRecipe(item)}>
-      <FontAwesomeIcon icon={faTrashCan} size="sm" style={{color: "#422800", marginLeft: "5px", cursor: "pointer"}} />
+      <FontAwesomeIcon icon={faTrashCan} size="sm" style={{color: "#422800", marginLeft: "5px", cursor: "pointer", float: "right"}} />
       </span>
       
       </div>

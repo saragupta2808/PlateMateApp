@@ -14,7 +14,7 @@ export default function IngredientList(props) {
     return (
       <div className= "ingredient-item" key={item.url} style={{display: "flex", alignItems : "center" , marginBottom : "1rem"}}>
          <FontAwesomeIcon icon={faHeart} size="sm" style={{color: "rgb(171 40 31)"}} />
-          <a style={{color: "#422800", marginLeft : "1rem", fontSize: "18px", }} href={`${item.url}`}>{item.label}</a>        
+          <a style={{color: "#422800", marginLeft : "1rem", fontSize: "15px", width: "440px", whiteSpace:"normal"}} href={`${item.url}`}>{item.label}</a>        
       </div>
     );
   });

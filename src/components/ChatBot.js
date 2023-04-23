@@ -15,7 +15,7 @@ export default function ChatBot(props){
             <Modal.Title style={{color:"#0c7b68", fontweight : "700" , fontsize: "25px",}}>Chat with us!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
+            
             <iframe className="chatbot" src='https://webchat.botframework.com/embed/plate-mate-qnabot?s=4KyHKufJb_o._ec2FKy4rxUJk0ua0N0hfZ4ILXzw55D8rq0QkXjj0So' ></iframe>
 
 

@@ -1,11 +1,11 @@
-import React,{ useEffect } from "react";
+import React from "react";
 import IngredientList from "./IngredientList";
 import FavoriteList from "./FavoriteList";
 import ChatBot from "./ChatBot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBasketShopping, faHeadset, faHeart, faMessage} from "@fortawesome/free-solid-svg-icons";
-import { AuthenticatedTemplate } from "@azure/msal-react";
+import { faBasketShopping, faHeart, faMessage} from "@fortawesome/free-solid-svg-icons";
 
+import {Typography, AppBar, Card, CardActions, CardMedia, CardContent, CssBaseline, Grid, Toolba, Container, Toolbar } from '@mui/material'
 
 
 
@@ -74,9 +74,32 @@ export default function Head(props) {
     );
   });
   return (
+
+    // <>
+    //   <CssBaseline/>
+    //   <AppBar position="sticky" style={{ background : "#1f7a8c"}}>
+    //     <Toolbar>
+    //       <Typography variant="h6"> 
+    //         Categories
+    //       </Typography>
+    //       <span onClick={props.handleOpenFavs} style={{ cursor: "pointer" }}>
+    //       <FontAwesomeIcon
+    //         icon={faHeart}
+    //         size="2xl"
+    //         style={{
+    //           color: "rgb(171 40 31)",
+    //           position: "absolute",
+    //           top: "42px",
+    //           left: "265px",
+    //         }}
+    //       />
+    //     </span> 
+    //     </Toolbar>
+    //   </AppBar>
+    // </>
    
     <header>
-      <nav>
+      <nav >
         <ul className="menu">
           <li>
             <a href="#" style={{ fontSize: "25px", fontWeight: "500" }}>

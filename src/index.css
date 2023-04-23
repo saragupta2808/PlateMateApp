@@ -6,29 +6,18 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
   font-family: 'Poppins', sans-serif;
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
   background-image: url('./components/bg-cook13.jpg');
   
-  
+  background-color: #63CCCA;
   background-size: 100% ;
   background-repeat: repeat;
   
 }
-.home-image{
- 
-  background-image: url('./components/bg-cook15.png');
-  width: 598px;
-    height: 598px;
- 
-  background-size: contain;
-  margin: auto;
-  background-repeat: no-repeat;
-}
-.home-logo{
-  margin-top: 50px;
-}
+
 *{
   margin: 0;
   padding: 0;
@@ -59,11 +48,8 @@ main{
   margin-bottom: 70px;
 
 }
-.nav-bar h2{
-  font-family: 'BioRhyme Expanded', serif;
-  color: #0c7b68;
 
-}
+
 .navMenu {  
   padding: 10px;
   margin-left: 26px;
@@ -180,14 +166,17 @@ input[type="text"]:focus:hover {
 .card {
   width: 25rem;
   height: 33rem;
-  border-radius: 38px;
-  border: 3.5px solid #0c7b68;
+  border-radius: 22px;
+  
+  border: 3px solid #397367;
   overflow: hidden;
   cursor: pointer;
   position: relative;
   
   box-shadow: 0 10px 30px 5px rgba(11, 217, 152, 0.2);
+
   margin-top: 15px;
+  /* background-color: #5DA399; */
   background-image: url('./components/bg-cook6.jpg');  
   background-position: bottom;
   background-size: contain;
@@ -303,6 +292,8 @@ p {
 
 .logo{
   font-family: 'BioRhyme Expanded', serif;
+/*   
+  font-family: 'Poppins', sans-serif; */
   color: #0c7b68;
   font-weight: 800;
   text-shadow: 2px 2px 8px #5acfb8;
