@@ -1,3 +1,5 @@
+PlateMate- Your recipe buddy, is a web application created using React, where you can browse over 10 lakh+ recipes. You can filter recipes by cuisine, dishtype, mealtype or even search on your own! The app allows you to add your favorite recipes to a favorites list and you can add all the ingredients required to make a recipe into your basket with just a click. For any further queries, you can chat with the bot integrated in the app.
+
 # Try out this app using the link : https://witty-island-044007110.3.azurestaticapps.net/
 
 
