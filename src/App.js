@@ -129,7 +129,6 @@ export default function App() {
           obj.isStriked = !line.isStriked;
           const ing = [...item.ingredients];
           ing[index] = obj;
-          console.log(ing);
           return { name: item.name, ingredients: ing };
         } else {
           return { ...item };
