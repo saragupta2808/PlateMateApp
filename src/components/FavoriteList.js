@@ -27,6 +27,8 @@ export default function IngredientList(props) {
             whiteSpace: "normal",
           }}
           href={`${item.url}`}
+          target="_blank"
+          rel="noreferrer" 
         >
           {item.label}
         </a>

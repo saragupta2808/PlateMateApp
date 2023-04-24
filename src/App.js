@@ -50,9 +50,13 @@ export default function App() {
       setGreeting("Good Evening !Here are some dinner recipes for you");
     }
 
-    const list = JSON.parse(localStorage.getItem("dataKey"));
-    if (list) {
-      setShoppingList(list);
+    const ingredientlist = JSON.parse(localStorage.getItem("ingredient-list"));
+    if (ingredientlist) {
+      setShoppingList(ingredientlist);
+    }
+    const favoriteslist = JSON.parse(localStorage.getItem("favorite-list"));
+    if (favoriteslist) {
+      setfavList(favoriteslist);
     }
   }, []);
   React.useEffect(() => {
@@ -60,8 +64,8 @@ export default function App() {
     let promise = getApiData(recipeData);
     promise.then(
       (result) => {
-        console.log(result);
-        setRecipeData(result);
+        if(result.length)
+          setRecipeData(result);
       },
       (error) => {
         console.log(error);
@@ -69,8 +73,6 @@ export default function App() {
     );
   }, [url]);
   React.useEffect(() => {
-    console.log("setting url");
-
     setUrl(
       `https://api.edamam.com/api/recipes/v2/?type=public&app_id=89d6a7bf&app_key=b6aafb08de37e4b384672eea7066b05f&${filter}=${filterValue}`
     );
@@ -103,7 +105,7 @@ export default function App() {
               ...prevState[i],
               fav: !prevState[i].fav,
             };
-            favs.push(mr);
+            //favs.push(mr);
             found = true;
           } else favs.push(prevState[i]);
         }
@@ -113,8 +115,9 @@ export default function App() {
       } else {
         favs.push({ ...recipe, fav: true });
       }
+      localStorage.setItem("favorite-list", JSON.stringify(favs));
       return favs;
-    });
+    });   
   }
 
   function handleStrike(index, line) {
@@ -215,10 +218,10 @@ export default function App() {
       for (let item = 0; item < prevState.length; item++)
         updatedList.push(prevState[item]);
       updatedList.push(newRecipe);
-
+      localStorage.setItem("ingredient-list", JSON.stringify(updatedList));
       return updatedList;
     });
-    localStorage.setItem("dataKey", JSON.stringify(shoppingList));
+    
     toast.success("Successfully added ingredients to your list!");
   }
 
